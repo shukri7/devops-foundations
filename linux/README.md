@@ -1,21 +1,14 @@
 # Linux Fundamentals
 
-This directory contains hands-on Linux exercises completed using Ubuntu WSL.
+This directory contains hands-on Linux exercises completed using Ubuntu WSL as part of my DevOps foundations portfolio.
 
 ## Topics Covered
 
-- File system navigation
-- File and directory management
-- Viewing system files
-- Real-time log monitoring
-- Command-line utilities
-
-## Commands Practiced
+### File System Navigation
 
 - `cd`
 - `ls`
 - `pwd`
-- `touch`
 - `mkdir`
 - `cp`
 - `mv`
@@ -25,21 +18,91 @@ This directory contains hands-on Linux exercises completed using Ubuntu WSL.
 - `tail`
 - `less`
 
-## Files
+### Permissions and Ownership
 
-- `file-system-notes.md` – Notes documenting Linux commands and their usage.
+- `chmod`
+- `chown`
+- `ls -l`
 
-## Environment
+Examples:
 
-- Ubuntu (WSL)
-- Bash
-- Git
-- GitHub
+```bash
+chmod +x hello.sh
+chmod 644 secret.txt
+sudo chown root:root hello.sh
+```
+
+### Process Management
+
+- `ps aux`
+- `top`
+- `htop`
+- `jobs`
+- `fg`
+- `bg`
+- `kill`
+- `killall`
+
+Examples:
+
+```bash
+sleep 100 &
+ps aux | grep sleep
+kill <PID>
+```
+
+### Text Processing
+
+- `grep`
+- `wc`
+- `awk`
+- `sed`
+- `sort`
+- `uniq`
+- Pipes (`|`)
+
+Examples:
+
+```bash
+grep "root" /etc/passwd
+grep "root" /etc/passwd | wc -l
+ps aux | awk '{print $1, $11}'
+sed 's/old/new/g' file.txt
+cat /etc/passwd | grep "root"
+```
+
+## Directory Structure
+
+```text
+linux/
+├── README.md
+├── file-system-notes.md
+├── permissions/
+│   ├── hello.sh
+│   └── secret.txt
+├── processes/
+└── text-processing/
+```
 
 ## Skills Demonstrated
 
 - Linux command-line proficiency
-- File system navigation
-- File management
-- Working with system logs
-- Version control and documentation
+- File and directory management
+- File permissions and ownership
+- Process monitoring and management
+- Text processing and filtering
+- Working with system utilities
+- Bash scripting fundamentals
+- Ubuntu (WSL) administration
+
+## Technologies
+
+- Ubuntu (WSL)
+- Bash
+- Linux Command Line
+- Git
+- GitHub
+
+## Objective
+
+This section showcases foundational Linux skills commonly used in DevOps, Site Reliability Engineering (SRE), Platform Engineering, and Cloud Engineering environments.
