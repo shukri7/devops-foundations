@@ -73,16 +73,13 @@ cat /etc/passwd | grep "root"
 
 ## Directory Structure
 
-```text
 linux/
 ├── README.md
 ├── file-system-notes.md
-├── permissions/
-│   ├── hello.sh
-│   └── secret.txt
-├── processes/
-└── text-processing/
-```
+├── file.txt
+└── permissions/
+    ├── hello.sh
+    └── secret.txt
 
 ## Skills Demonstrated
 
