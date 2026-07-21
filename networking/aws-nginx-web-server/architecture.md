@@ -1,3 +1,4 @@
+```text
 Internet
    |
 Public IP
@@ -10,3 +11,4 @@ Ubuntu EC2
 NGINX
    |
 Web Browser
+```
