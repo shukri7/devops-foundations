@@ -1,44 +1,108 @@
-# DevOps Foundations
+# Linux Fundamentals
 
-A collection of hands-on projects demonstrating foundational skills in Linux, Bash, and DevOps tooling.
+This directory contains hands-on Linux exercises completed using Ubuntu WSL as part of my DevOps foundations portfolio.
 
-## Repository Structure
+## Topics Covered
 
-### Bash
-- Shell scripting
-- Loops and conditionals
-- Functions
-- Environment variables
-- File operations
-- Error handling
+### File System Navigation
 
-### Linux
-- File system navigation
-- Command-line utilities
+- `cd`
+- `ls`
+- `pwd`
+- `mkdir`
+- `cp`
+- `mv`
+- `rm`
+- `cat`
+- `head`
+- `tail`
+- `less`
+
+### Permissions and Ownership
+
+- `chmod`
+- `chown`
+- `ls -l`
+
+Examples:
+
+```bash
+chmod +x hello.sh
+chmod 644 secret.txt
+sudo chown root:root hello.sh
+```
+
+### Process Management
+
+- `ps aux`
+- `top`
+- `htop`
+- `jobs`
+- `fg`
+- `bg`
+- `kill`
+- `killall`
+
+Examples:
+
+```bash
+sleep 100 &
+ps aux | grep sleep
+kill <PID>
+```
+
+### Text Processing
+
+- `grep`
+- `wc`
+- `awk`
+- `sed`
+- `sort`
+- `uniq`
+- Pipes (`|`)
+
+Examples:
+
+```bash
+grep "root" /etc/passwd
+grep "root" /etc/passwd | wc -l
+ps aux | awk '{print $1, $11}'
+sed 's/old/new/g' file.txt
+cat /etc/passwd | grep "root"
+```
+
+## Directory Structure
+
+```text
+linux/
+├── README.md
+├── file-system-notes.md
+├── permissions/
+│   ├── hello.sh
+│   └── secret.txt
+├── processes/
+└── text-processing/
+```
+
+## Skills Demonstrated
+
+- Linux command-line proficiency
 - File and directory management
-- System administration fundamentals
-
-## Related Repositories
-
-### Git Labs
-A dedicated repository showcasing Git workflows and version control concepts:
-
-- Branching strategies
-- Merge conflict resolution
-- Reverting commits
-- Feature and hotfix workflows
-- Commit history management
-
-Repository:
-`github.com/shukri7/git-labs`
+- File permissions and ownership
+- Process monitoring and management
+- Text processing and filtering
+- Working with system utilities
+- Bash scripting fundamentals
+- Ubuntu (WSL) administration
 
 ## Technologies
 
-- Linux (Ubuntu/WSL)
+- Ubuntu (WSL)
 - Bash
+- Linux Command Line
 - Git
 - GitHub
 
-## Career Focus
+## Objective
 
-This repository highlights practical experience with technologies commonly used in DevOps, Site Reliability Engineering (SRE), and Platform Engineering roles.
+This section showcases foundational Linux skills commonly used in DevOps, Site Reliability Engineering (SRE), Platform Engineering, and Cloud Engineering environments.
