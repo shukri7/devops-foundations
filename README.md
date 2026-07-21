@@ -1,40 +1,44 @@
 # DevOps Foundations
 
-A collection of hands-on projects and exercises demonstrating proficiency in Linux, Bash, Git, and foundational DevOps practices.
+A collection of hands-on projects demonstrating foundational skills in Linux, Bash, and DevOps tooling.
 
-## Repository Contents
+## Repository Structure
 
 ### Bash
 - Shell scripting
-- Control flow and loops
-- Functions and variables
+- Loops and conditionals
+- Functions
+- Environment variables
 - File operations
 - Error handling
 
-### Git Labs
-- Branching strategies
-- Merge conflict resolution
-- Repository management
-- Version control workflows
-
 ### Linux
 - File system navigation
-- System administration basics
 - Command-line utilities
 - File and directory management
+- System administration fundamentals
 
-## Technical Skills
+## Related Repositories
+
+### Git Labs
+A dedicated repository showcasing Git workflows and version control concepts:
+
+- Branching strategies
+- Merge conflict resolution
+- Reverting commits
+- Feature and hotfix workflows
+- Commit history management
+
+Repository:
+`github.com/shukri7/git-labs`
+
+## Technologies
 
 - Linux (Ubuntu/WSL)
 - Bash
 - Git
 - GitHub
-- Command-Line Tools
 
-## Objective
+## Career Focus
 
-This repository showcases practical experience with core technologies commonly used in DevOps, Site Reliability Engineering (SRE), and Platform Engineering environments.
-
-## Author
-
-Shukri
+This repository highlights practical experience with technologies commonly used in DevOps, Site Reliability Engineering (SRE), and Platform Engineering roles.
