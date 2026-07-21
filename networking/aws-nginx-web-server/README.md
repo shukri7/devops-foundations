@@ -36,3 +36,7 @@ This project demonstrates deploying an Ubuntu EC2 instance on AWS and configurin
 - Add a custom domain.
 - Add HTTPS.
 - Deploy Docker containers.
+
+  ## Screenshot
+
+![NGINX Welcome Page](./screenshots/Screenshot%202026-07-21%20171924.png)
