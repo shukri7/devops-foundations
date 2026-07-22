@@ -37,6 +37,10 @@ This project demonstrates deploying an Ubuntu EC2 instance on AWS and configurin
 - Add HTTPS.
 - Deploy Docker containers.
 
+  ## Note
+
+DNS configuration for `shukriigal.com` is pending due to a temporary IONOS portal issue encountered during setup. The domain purchase was completed successfully and will be mapped to the EC2 public IP using an A record once DNS management becomes available.
+
   ## Screenshot
 
 ![NGINX Welcome Page](./screenshots/Screenshot%202026-07-21%20171924.png)
