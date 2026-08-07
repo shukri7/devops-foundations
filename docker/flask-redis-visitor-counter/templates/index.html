@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask + Redis Visitor Counter</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <main class="container">
+
+        <h1>🚀 Flask + Redis Visitor Counter</h1>
+
+        <p class="description">
+            A multi-container application built with Flask, Redis, Docker Compose,
+            and Nginx to demonstrate modern DevOps deployment practices.
+        </p>
+
+        <div class="message-box">
+            <h2>{{ message }}</h2>
+        </div>
+
+        <div class="buttons">
+            <a href="/">🏠 Home</a>
+            <a href="/count">📈 Increment Counter</a>
+        </div>
+
+        <div class="features">
+            <h3>Technologies Demonstrated</h3>
+
+            <ul>
+                <li>🐳 Docker</li>
+                <li>📦 Docker Compose</li>
+                <li>🔴 Redis</li>
+                <li>🌐 Container Networking</li>
+                <li>💾 Persistent Volumes</li>
+                <li>⚙️ Environment Variables</li>
+                <li>⚖️ Nginx Load Balancing</li>
+            </ul>
+        </div>
+
+    </main>
+
+</body>
+</html>
