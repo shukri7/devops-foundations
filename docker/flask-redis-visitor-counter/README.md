@@ -216,7 +216,3 @@ This project also helped me better understand how containerized services communi
 - Add automated testing
 
 ---
-
-# 📄 License
-
-This project was created for educational purposes as part of the CoderCo DevOps Bootcamp.
