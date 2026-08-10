@@ -3,45 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask + Redis Visitor Counter</title>
+    <title>Container Service Dashboard</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
 
-    <main class="container">
+<header class="topbar">
+    <div>
+        <span class="logo-mark">DC</span>
+        <span class="brand">Container Service Dashboard</span>
+    </div>
 
-        <h1>🚀 Flask + Redis Visitor Counter</h1>
+    <nav>
+        <a href="/" class="active">Overview</a>
+        <a href="/count">Visitor Metrics</a>
+    </nav>
+</header>
 
-        <p class="description">
-            A multi-container application built with Flask, Redis, Docker Compose,
-            and Nginx to demonstrate modern DevOps deployment practices.
-        </p>
+<main class="page">
 
-        <div class="message-box">
-            <h2>{{ message }}</h2>
+    <section class="hero">
+
+        <div class="hero-copy">
+            <span class="eyebrow">DOCKER MULTI-CONTAINER PROJECT</span>
+
+            <h1>
+                Flask and Redis,
+                <span>running as connected services.</span>
+            </h1>
+
+            <p>
+                A containerized web application demonstrating service discovery,
+                persistent storage, reverse proxying and horizontal scaling.
+            </p>
+
+            <div class="actions">
+                <a href="/count" class="primary-btn">
+                    View Visitor Metrics →
+                </a>
+
+                <a href="#architecture" class="secondary-btn">
+                    View Architecture
+                </a>
+            </div>
         </div>
 
-        <div class="buttons">
-            <a href="/">🏠 Home</a>
-            <a href="/count">📈 Increment Counter</a>
+        <div class="status-panel">
+
+            <div class="status-heading">
+                <span>Service Status</span>
+                <span class="online">● Running</span>
+            </div>
+
+            <div class="service">
+                <div>
+                    <strong>Nginx</strong>
+                    <small>Reverse Proxy</small>
+                </div>
+                <span>8080 → 80</span>
+            </div>
+
+            <div class="service">
+                <div>
+                    <strong>Flask</strong>
+                    <small>Application Service</small>
+                </div>
+                <span>3 replicas</span>
+            </div>
+
+            <div class="service">
+                <div>
+                    <strong>Redis</strong>
+                    <small>Shared Data Store</small>
+                </div>
+                <span>6379</span>
+            </div>
+
         </div>
 
-        <div class="features">
-            <h3>Technologies Demonstrated</h3>
+    </section>
 
-            <ul>
-                <li>🐳 Docker</li>
-                <li>📦 Docker Compose</li>
-                <li>🔴 Redis</li>
-                <li>🌐 Container Networking</li>
-                <li>💾 Persistent Volumes</li>
-                <li>⚙️ Environment Variables</li>
-                <li>⚖️ Nginx Load Balancing</li>
-            </ul>
+
+    <section class="architecture" id="architecture">
+
+        <span class="eyebrow">ARCHITECTURE</span>
+
+        <h2>How requests move through the stack</h2>
+
+        <div class="architecture-grid">
+
+            <div class="architecture-item">
+                <span>01</span>
+                <h3>Nginx</h3>
+                <p>Receives incoming traffic through the application's public endpoint.</p>
+            </div>
+
+            <div class="architecture-item">
+                <span>02</span>
+                <h3>Flask</h3>
+                <p>Processes application requests across multiple container instances.</p>
+            </div>
+
+            <div class="architecture-item">
+                <span>03</span>
+                <h3>Redis</h3>
+                <p>Provides shared state and persistent visitor-count storage.</p>
+            </div>
+
         </div>
 
-    </main>
+    </section>
+
+</main>
+
+<footer>
+    Flask · Redis · Docker Compose · Nginx
+</footer>
 
 </body>
 </html>

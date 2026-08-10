@@ -1,49 +1,52 @@
-# 🚀 Flask + Redis Multi-Container Application
+#  Flask + Redis Visitor Counter
 
-This project is part of my **DevOps Foundations** repository and demonstrates how to build, deploy, and scale a multi-container web application using **Docker**, **Docker Compose**, **Redis**, and **Nginx**.
+A multi-container Flask application built with Docker Compose, Redis, and Nginx.
 
-The application consists of multiple Docker containers communicating over a Docker bridge network. Nginx acts as a reverse proxy, Flask serves the web application, and Redis stores the visitor count using persistent storage.
+I built this project to get hands-on with Docker networking, persistent storage, reverse proxies, and scaling an application across multiple containers.
 
 ---
 
-# 🏗️ Architecture
+# Architecture
 
 ```text
                     Browser
-                        │
-                 localhost:8080
-                        │
-                        ▼
+                       │
+                localhost:8080
+                       │
+                       ▼
               Nginx Reverse Proxy
-                        │
-        ┌───────────────┼───────────────┐
-        ▼               ▼               ▼
-    Flask #1        Flask #2        Flask #3
-        │               │               │
-        └───────────────┼───────────────┘
-                        ▼
+                       │
+        ┌──────────────┼──────────────┐
+        ▼              ▼              ▼
+    Flask #1       Flask #2       Flask #3
+        │              │              │
+        └──────────────┼──────────────┘
+                       ▼
                      Redis
-                        │
-                        ▼
-               Persistent Docker Volume
+                       │
+                       ▼
+              Persistent Volume
 ```
+
+Nginx is the entry point to the application. It forwards traffic to the Flask service, which is running across three containers. All three Flask containers connect to the same Redis service for the visitor count.
 
 ---
 
 # ✨ Features
 
-- 🐳 Dockerized Flask application
-- 🔴 Redis visitor counter
-- 📦 Multi-container architecture with Docker Compose
-- 🌐 Docker bridge networking
-- ⚙️ Environment variables for application configuration
-- 💾 Persistent Redis storage using Docker volumes
-- 🔄 Nginx reverse proxy
-- 📈 Horizontal scaling with multiple Flask containers
+- Flask + Redis application
+- Multi-container setup with Docker Compose
+- Nginx reverse proxy
+- Docker bridge networking
+- Docker DNS service discovery
+- Redis volume for persistent data
+- Environment variables for configuration
+- 3 Flask containers running behind Nginx
+- Separate home and visitor count pages
 
 ---
 
-# 🛠️ Tech Stack
+#  Tech Stack
 
 - Python
 - Flask
@@ -57,31 +60,27 @@ The application consists of multiple Docker containers communicating over a Dock
 # 📂 Project Structure
 
 ```text
-devops-foundations/
-└── docker/
-    └── flask-redis-visitor-counter/
-        ├── screenshots/
-        │   ├── home-page.png
-        │   ├── visit-count.png
-        │   ├── docker-compose-ps.png
-        │   └── docker-compose-up.png
-        ├── static/
-        │   ├── images/
-        │   └── style.css
-        ├── templates/
-        │   └── index.html
-        ├── app.py
-        ├── Dockerfile
-        ├── docker-compose.yml
-        ├── nginx.conf
-        ├── requirements.txt
-        ├── .dockerignore
-        └── README.md
+flask-redis-visitor-counter/
+├── screenshots/
+│   ├── home-page.png
+│   └── visit-count.png
+├── static/
+│   └── style.css
+├── templates/
+│   ├── index.html
+│   └── count.html
+├── app.py
+├── Dockerfile
+├── docker-compose.yml
+├── nginx.conf
+├── requirements.txt
+├── .dockerignore
+└── README.md
 ```
 
 ---
 
-# 🚀 Getting Started
+#  Running the Project
 
 Clone the repository:
 
@@ -90,129 +89,137 @@ git clone https://github.com/shukri7/devops-foundations.git
 cd devops-foundations/docker/flask-redis-visitor-counter
 ```
 
-Build and start the application:
+Build and start the containers:
 
 ```bash
 docker compose up --build --scale web=3
 ```
 
-Open the application:
+Check the running services:
 
-**Home Page**
-
+```bash
+docker compose ps
 ```
+
+You should see Nginx, Redis, and three Flask containers running.
+
+---
+
+# 🌐 Accessing the App
+
+### Home
+
+```text
 http://localhost:8080
 ```
 
-**Visitor Counter**
+The home page gives an overview of the application and the services running behind it.
 
-```
+### Visitor Count
+
+```text
 http://localhost:8080/count
 ```
 
----
-
-# 📸 Screenshots
-
-## Home Page
-
-![Home Page](screenshots/home-page.png)
+The count is stored in Redis and increases whenever the count page is visited or refreshed.
 
 ---
+# 🎬 Demo
 
-## Visitor Counter
+A quick walkthrough of the application showing the home page, visitor counter, and Redis-backed count updating on refresh.
 
-![Visitor Counter](screenshots/visit-count.png)
+[View the demo video](screenshots/demo.mp4)
+
+The demo shows the application running through Nginx, navigating from the home page to the visitor counter, and the Redis-backed count updating when the page is refreshed.
+---
+
+#  What This Project Covers
+
+### Docker Compose
+
+Docker Compose manages the Flask, Redis, and Nginx services together instead of running each container manually.
+
+### Container Networking
+
+The services communicate over Docker's bridge network. Flask connects to Redis using the `redis` service name instead of a container IP address.
+
+### Nginx
+
+Nginx sits in front of the Flask application as the reverse proxy. The browser connects through port `8080`, while the Flask containers stay internal on port `5000`.
+
+### Scaling
+
+The Flask service can be scaled to multiple containers:
+
+```bash
+docker compose up --build --scale web=3
+```
+
+Nginx provides one entry point for the application while requests are handled by the Flask containers behind it.
+
+### Redis
+
+Redis stores the visitor count so the data is shared between all Flask containers instead of being tied to one container.
+
+### Persistent Storage
+
+Redis uses a Docker volume so the count can survive container restarts.
+
+### Environment Variables
+
+The Flask application gets the Redis host and port from environment variables rather than hardcoding the connection details.
 
 ---
 
-## Docker Compose Services
+#  Problems I Ran Into
 
-![Docker Compose Services](screenshots/docker-compose-ps.png)
+### Flask couldn't connect to Redis
+
+At first, I had to understand that `localhost` inside the Flask container refers to the Flask container itself, not Redis.
+
+I connected Flask using the Redis Compose service name instead:
+
+```text
+redis
+```
+
+Docker's internal DNS handles resolving that name to the Redis container.
+
+### CSS wasn't loading
+
+Flask wasn't finding the stylesheet because it wasn't in the correct location. Moving it into the `static` directory fixed it.
+
+### Scaling Flask
+
+Once I scaled Flask to multiple containers, I needed a single entry point for the application. I added Nginx in front of the Flask service and exposed Nginx on port `8080`.
 
 ---
 
-## Running Containers
+#  What I Learned
 
-![Running Containers](screenshots/docker-compose-up.png)
+This project helped me get more comfortable with:
 
----
-
-# 🧠 DevOps Concepts Demonstrated
-
-This project demonstrates several core DevOps concepts:
-
-- Docker image creation using Dockerfiles
-- Multi-container orchestration with Docker Compose
-- Docker bridge networking
-- Docker DNS service discovery
-- Environment variable configuration
-- Persistent storage using Docker volumes
-- Reverse proxy configuration with Nginx
-- Horizontal scaling of application containers
+- Building Docker images
+- Running multi-container applications
+- Docker Compose
+- Container networking
+- Docker DNS
 - Service-to-service communication
-- Containerized application deployment
+- Redis
+- Persistent volumes
+- Environment variables
+- Nginx reverse proxying
+- Scaling application containers
+- Troubleshooting containerized applications
 
 ---
 
-# 🐞 Challenges & Solutions
+#  Next Steps
 
-### Flask could not connect to Redis
+Some things I'd like to add later:
 
-Initially, the Flask application could not communicate with Redis because the correct Docker service hostname was not being used.
-
-**Solution**
-
-Configured Flask to connect using the Docker Compose service name (`redis`), allowing Docker's internal DNS to resolve the container automatically.
-
----
-
-### CSS not loading
-
-The stylesheet was initially placed in the wrong directory, causing Flask to return a **404 Not Found** error.
-
-**Solution**
-
-Moved the stylesheet into Flask's `static` directory so it could be served correctly.
-
----
-
-### Scaling the application
-
-Running multiple Flask containers required introducing a reverse proxy so incoming requests could be routed through a single public endpoint.
-
-**Solution**
-
-Configured Nginx as a reverse proxy and scaled the Flask service while keeping Redis as a shared backend.
-
----
-
-# 📚 What I Learned
-
-Building this project strengthened my understanding of:
-
-- Building custom Docker images
-- Running multi-container applications with Docker Compose
-- Container-to-container communication using Docker bridge networking
-- Docker DNS service discovery
-- Environment-based application configuration
-- Persistent storage with Docker volumes
-- Reverse proxies with Nginx
-- Scaling containerized applications
-- Production-inspired application architecture
-
-This project also helped me better understand how containerized services communicate over Docker networks and how a reverse proxy can expose multiple application containers through a single public endpoint.
-
----
-
-# 🔮 Future Improvements
-
-- Add Docker health checks
-- Implement CI/CD using GitHub Actions
-- Automatically push Docker images to Amazon ECR
-- Deploy the application to AWS ECS or Kubernetes
-- Configure HTTPS with Let's Encrypt
-- Add monitoring with Prometheus and Grafana
-- Add automated testing
-
----
+- Docker health checks
+- Automated testing
+- GitHub Actions CI/CD
+- AWS deployment
+- Monitoring and logging

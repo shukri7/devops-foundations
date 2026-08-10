@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Metrics</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="topbar">
+    <div>
+        <span class="logo-mark">DC</span>
+        <span class="brand">Container Service Dashboard</span>
+    </div>
+
+    <nav>
+        <a href="/">Overview</a>
+        <a href="/count" class="active">Visitor Metrics</a>
+    </nav>
+</header>
+
+
+<main class="page metrics-page">
+
+    <section class="metric-header">
+
+        <div>
+            <span class="eyebrow">REDIS METRIC</span>
+            <h1>Visitor Counter</h1>
+
+            <p>
+                Each request to this page updates a shared Redis value
+                accessible by every Flask container.
+            </p>
+        </div>
+
+        <span class="online status-badge">
+            ● Redis connected
+        </span>
+
+    </section>
+
+
+    <section class="metric-card">
+
+        <div class="metric-label">
+            TOTAL PAGE VISITS
+        </div>
+
+        <div class="metric-value">
+            {{ visits }}
+        </div>
+
+        <div class="metric-description">
+            Stored in Redis persistent storage
+        </div>
+
+    </section>
+
+
+    <section class="metric-actions">
+
+        <a href="/" class="secondary-btn">
+            ← Back to Overview
+        </a>
+
+        <a href="/count" class="primary-btn">
+            Refresh Metric
+        </a>
+
+    </section>
+
+</main>
+
+<footer>
+    Shared state across horizontally scaled Flask containers
+</footer>
+
+</body>
+</html>

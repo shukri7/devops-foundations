@@ -14,21 +14,17 @@ db = redis.Redis(
     decode_responses=True
 )
 
+
 @app.route("/")
 def home():
-    return render_template(
-        "index.html",
-        message="Welcome to the Flask + Redis visitor counter!"
-    )
+    return render_template("index.html")
+
 
 @app.route("/count")
 def count():
     visits = db.incr("visits")
+    return render_template("count.html", visits=visits)
 
-    return render_template(
-        "index.html",
-        message=f"This page has been visited {visits} times."
-    )
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
