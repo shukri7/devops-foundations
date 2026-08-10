@@ -1,3 +1,5 @@
+
+
 #  Flask + Redis Visitor Counter
 
 A multi-container Flask application built with Docker Compose, Redis, and Nginx.
@@ -128,7 +130,10 @@ The count is stored in Redis and increases whenever the count page is visited or
 
 A quick walkthrough of the application showing the home page, visitor counter, and Redis-backed count updating on refresh.
 
-[View the demo video](screenshots/demo.mp4)
+
+https://github.com/user-attachments/assets/90546af3-efcb-4a1d-a974-6e7522f26f7a
+
+
 
 The demo shows the application running through Nginx, navigating from the home page to the visitor counter, and the Redis-backed count updating when the page is refreshed.
 ---
