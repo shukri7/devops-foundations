@@ -138,6 +138,6 @@ I'm continuing to build toward cloud and platform engineering by going deeper in
 
 ## 🤝 Connect
 
-**LinkedIn:** [Add your LinkedIn URL here]
+**LinkedIn:** [www.linkedin.com/in/shukri-igal/]
 
 Explore the folders in this repository for project documentation, configurations, scripts, and notes from my hands-on DevOps work.
