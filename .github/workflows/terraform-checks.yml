@@ -1,0 +1,42 @@
+
+name: Terraform CI Checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "cicd/terraform-checks/**"
+      - ".github/workflows/terraform-checks.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "cicd/terraform-checks/**"
+      - ".github/workflows/terraform-checks.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  terraform-checks:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: cicd/terraform-checks
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v4
+
+      - name: Check Terraform formatting
+        run: terraform fmt -check -recursive
+
+      - name: Initialize Terraform
+        run: terraform init -backend=false -input=false
+
+      - name: Validate Terraform
+        run: terraform validate -no-color
