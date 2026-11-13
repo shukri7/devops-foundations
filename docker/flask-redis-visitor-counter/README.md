@@ -1,93 +1,88 @@
-# 🐳 Flask + Redis Visitor Counter
 
-## Project Overview
 
-Built a multi-container Flask application using Docker Compose, Redis, and Nginx to practice container networking, reverse proxying, persistent storage, and scaling.
+#  Flask + Redis Visitor Counter
 
-The application displays a visitor counter backed by Redis and runs across three Flask containers behind a single Nginx entry point.
+A multi-container Flask application built with Docker Compose, Redis, and Nginx.
 
-## Technologies Used
+I built this project to get hands-on with Docker networking, persistent storage, reverse proxies, and scaling an application across multiple containers.
 
-- Python and Flask
-- Docker and Docker Compose
-- Redis
-- Nginx
-- Docker networking and DNS
-- Docker volumes
-- Git and GitHub
+---
 
-## What I Did
-
-1. Built a Flask application with separate home and visitor count pages.
-2. Containerized the application using a Dockerfile.
-3. Configured Docker Compose to run Flask, Redis, and Nginx together.
-4. Connected Flask to Redis using Docker's internal DNS service discovery.
-5. Added a Docker volume to persist Redis data.
-6. Configured Nginx as a reverse proxy on port `8080`.
-7. Scaled the Flask service to three containers using Docker Compose.
-8. Tested the application and verified that the shared visitor count increased when refreshing the count page.
-
-## Architecture
+# Architecture
 
 ```text
-Browser
-   |
-   v
-localhost:8080
-   |
-   v
-Nginx Reverse Proxy
-   |
-   +------------+------------+
-   |            |            |
-   v            v            v
-Flask #1     Flask #2     Flask #3
-   |            |            |
-   +------------+------------+
-                |
-                v
-              Redis
-                |
-                v
-        Persistent Volume
+                    Browser
+                       │
+                localhost:8080
+                       │
+                       ▼
+              Nginx Reverse Proxy
+                       │
+        ┌──────────────┼──────────────┐
+        ▼              ▼              ▼
+    Flask #1       Flask #2       Flask #3
+        │              │              │
+        └──────────────┼──────────────┘
+                       ▼
+                     Redis
+                       │
+                       ▼
+              Persistent Volume
 ```
 
-Nginx provides one entry point for the application. The Flask containers communicate with the same Redis service, allowing them to share the visitor count.
+Nginx is the entry point to the application. It forwards traffic to the Flask service, which is running across three containers. All three Flask containers connect to the same Redis service for the visitor count.
 
-## What Changed
+---
 
-**Before:** A Flask application without the final multi-container deployment architecture.
+# ✨ Features
 
-**After:** A Docker Compose environment with three Flask containers, an Nginx reverse proxy, shared Redis storage, and persistent data.
+- Flask + Redis application
+- Multi-container setup with Docker Compose
+- Nginx reverse proxy
+- Docker bridge networking
+- Docker DNS service discovery
+- Redis volume for persistent data
+- Environment variables for configuration
+- 3 Flask containers running behind Nginx
+- Separate home and visitor count pages
 
-## Challenges and Troubleshooting
+---
 
-**Flask-to-Redis connectivity:** Initially misunderstood how `localhost` works inside containers. Resolved the connection by using the Docker Compose service name `redis`, which Docker resolves through internal DNS.
+#  Tech Stack
 
-**CSS not loading:** Flask could not locate the stylesheet until it was moved into the correct `static/` directory.
+- Python
+- Flask
+- Redis
+- Docker
+- Docker Compose
+- Nginx
 
-**Scaling Flask:** Added Nginx as a single entry point so the application could run behind a reverse proxy while scaling the Flask service to three containers.
+---
 
-## Results and Verification
+# 📂 Project Structure
 
-- Successfully ran Flask, Redis, and Nginx together using Docker Compose.
-- Scaled the Flask service to three containers.
-- Accessed the application through Nginx on port `8080`.
-- Confirmed that the visitor count increased when the count page was refreshed.
-- Used a Docker volume for Redis data persistence.
-- Verified service communication through Docker networking.
+```text
+flask-redis-visitor-counter/
+├── screenshots/
+│   ├── home-page.png
+│   └── visit-count.png
+├── static/
+│   └── style.css
+├── templates/
+│   ├── index.html
+│   └── count.html
+├── app.py
+├── Dockerfile
+├── docker-compose.yml
+├── nginx.conf
+├── requirements.txt
+├── .dockerignore
+└── README.md
+```
 
-### Application Screenshots
+---
 
-**Home page**
-
-![Flask application home page](screenshots/home-page.png)
-
-**Visitor counter**
-
-![Redis-backed visitor counter](screenshots/visit-count.png)
-
-## Running the Project
+#  Running the Project
 
 Clone the repository:
 
@@ -102,28 +97,134 @@ Build and start the containers:
 docker compose up --build --scale web=3
 ```
 
-Check the running containers:
+Check the running services:
 
 ```bash
 docker compose ps
 ```
 
-Open the application:
+You should see Nginx, Redis, and three Flask containers running.
 
-- Home page: `http://localhost:8080`
-- Visitor counter: `http://localhost:8080/count`
+---
 
-## Key Takeaways
+# 🌐 Accessing the App
 
-This project strengthened my understanding of Docker Compose, container-to-container communication, internal DNS, Redis persistence, and Nginx reverse proxying.
+### Home
 
-It also gave me practical experience troubleshooting container networking and running multiple application containers behind one entry point.
+```text
+http://localhost:8080
+```
 
-## Future Improvements
+The home page gives an overview of the application and the services running behind it.
 
-- Add container health checks.
-- Implement automated application tests.
-- Integrate GitHub Actions.
-- Deploy the application to AWS.
-- Introduce monitoring and logging.
+### Visitor Count
 
+```text
+http://localhost:8080/count
+```
+
+The count is stored in Redis and increases whenever the count page is visited or refreshed.
+
+---
+# 🎬 Demo
+
+A quick walkthrough of the application showing the home page, visitor counter, and Redis-backed count updating on refresh.
+
+
+https://github.com/user-attachments/assets/90546af3-efcb-4a1d-a974-6e7522f26f7a
+
+
+
+The demo shows the application running through Nginx, navigating from the home page to the visitor counter, and the Redis-backed count updating when the page is refreshed.
+---
+
+#  What This Project Covers
+
+### Docker Compose
+
+Docker Compose manages the Flask, Redis, and Nginx services together instead of running each container manually.
+
+### Container Networking
+
+The services communicate over Docker's bridge network. Flask connects to Redis using the `redis` service name instead of a container IP address.
+
+### Nginx
+
+Nginx sits in front of the Flask application as the reverse proxy. The browser connects through port `8080`, while the Flask containers stay internal on port `5000`.
+
+### Scaling
+
+The Flask service can be scaled to multiple containers:
+
+```bash
+docker compose up --build --scale web=3
+```
+
+Nginx provides one entry point for the application while requests are handled by the Flask containers behind it.
+
+### Redis
+
+Redis stores the visitor count so the data is shared between all Flask containers instead of being tied to one container.
+
+### Persistent Storage
+
+Redis uses a Docker volume so the count can survive container restarts.
+
+### Environment Variables
+
+The Flask application gets the Redis host and port from environment variables rather than hardcoding the connection details.
+
+---
+
+#  Problems I Ran Into
+
+### Flask couldn't connect to Redis
+
+At first, I had to understand that `localhost` inside the Flask container refers to the Flask container itself, not Redis.
+
+I connected Flask using the Redis Compose service name instead:
+
+```text
+redis
+```
+
+Docker's internal DNS handles resolving that name to the Redis container.
+
+### CSS wasn't loading
+
+Flask wasn't finding the stylesheet because it wasn't in the correct location. Moving it into the `static` directory fixed it.
+
+### Scaling Flask
+
+Once I scaled Flask to multiple containers, I needed a single entry point for the application. I added Nginx in front of the Flask service and exposed Nginx on port `8080`.
+
+---
+
+#  What I Learned
+
+This project helped me get more comfortable with:
+
+- Building Docker images
+- Running multi-container applications
+- Docker Compose
+- Container networking
+- Docker DNS
+- Service-to-service communication
+- Redis
+- Persistent volumes
+- Environment variables
+- Nginx reverse proxying
+- Scaling application containers
+- Troubleshooting containerized applications
+
+---
+
+#  Next Steps
+
+Some things I'd like to add later:
+
+- Docker health checks
+- Automated testing
+- GitHub Actions CI/CD
+- AWS deployment
+- Monitoring and logging
