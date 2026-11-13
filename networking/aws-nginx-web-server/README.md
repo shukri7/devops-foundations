@@ -1,93 +1,80 @@
-# AWS NGINX Web Server Project
+# 🌐 AWS EC2 + NGINX Web Server
 
 ## Project Overview
 
-This project demonstrates deploying a public web server on AWS using Ubuntu and NGINX and connecting it to a custom domain using DNS.
+Deployed an NGINX web server on an Ubuntu EC2 instance and configured a custom domain using IONOS DNS.
 
-## Live URL
+The goal was to gain hands-on experience with AWS infrastructure, Linux server administration, security groups, and DNS configuration.
 
-- http://nginx.shukriigal.com
+## Technologies Used
 
-## What I Built
+- AWS EC2
+- Ubuntu Linux
+- NGINX
+- SSH
+- AWS Security Groups
+- IONOS DNS
+- Git and GitHub
 
-- Launched an Ubuntu EC2 instance on AWS.
-- Connected to the instance using SSH.
-- Configured Security Groups to allow SSH (22) and HTTP (80) traffic.
-- Installed and configured NGINX.
-- Purchased a custom domain (`shukriigal.com`) through IONOS.
-- Created a DNS A record to map `nginx.shukriigal.com` to the EC2 public IP address.
-- Verified that the NGINX welcome page is publicly accessible over the internet.
+## What I Did
+
+1. Launched an Ubuntu EC2 instance on AWS.
+2. Connected to the server using SSH and a PEM key.
+3. Configured security group rules for SSH (port 22) and HTTP (port 80).
+4. Installed and started NGINX using Linux commands.
+5. Registered the domain `shukriigal.com` through IONOS.
+6. Created a DNS A record pointing `nginx.shukriigal.com` to the instance's public IP address.
+7. Tested the web server and verified that the NGINX welcome page was accessible.
 
 ## Architecture
 
 ```text
 Internet
-   ↓
+   |
+   v
 nginx.shukriigal.com
-   ↓
+   |
+   v
 IONOS DNS (A Record)
-   ↓
-AWS EC2 Public IP
-   ↓
-Ubuntu Server
-   ↓
-NGINX
+   |
+   v
+EC2 Public IP
+   |
+   v
+Ubuntu EC2 Instance
+   |
+   v
+NGINX Web Server
 ```
 
-## Commands Used
+## What Changed
 
-```bash
-sudo apt update
-sudo apt install nginx -y
-sudo systemctl enable nginx
-sudo systemctl start nginx
-sudo systemctl status nginx
+**Before:** No deployed web server or configured domain routing.
 
-curl localhost
-curl http://44.220.145.181
-```
+**After:** An Ubuntu EC2 instance running NGINX, with a custom subdomain configured to point to the server.
 
-## Skills Demonstrated
+## Challenges and Troubleshooting
 
-- AWS EC2
-- Linux Administration
-- SSH
-- NGINX
-- DNS Management
-- Networking
-- Git & GitHub
+**SSH authentication:** Initially referenced the wrong PEM file. Corrected the SSH key path to establish a connection.
 
-## Challenges Faced
+**DNS propagation:** The domain did not resolve immediately after creating the A record. Allowed time for DNS propagation and verified the configuration.
 
-### DNS Propagation
+**AWS networking:** Checked security group rules to confirm HTTP access and appropriate SSH restrictions.
 
-After creating the DNS A record, the custom domain did not resolve immediately. This was resolved by waiting for DNS propagation to complete.
+## Results and Verification
 
-### SSH Troubleshooting
+- Successfully launched and connected to an Ubuntu EC2 instance.
+- Installed and verified NGINX.
+- Configured a custom DNS record.
+- Confirmed that the NGINX welcome page loaded during testing.
 
-Initially experienced SSH authentication issues due to an incorrect PEM file reference. This was resolved by using the correct SSH key.
+**Project URL at the time of deployment:** `http://nginx.shukriigal.com`
 
-### AWS Networking
+### Screenshot
 
-Verified Security Group rules and confirmed that HTTP (80) was open to the public and SSH (22) was restricted appropriately.
+![NGINX welcome page](screenshots/Screenshot%202026-07-21%20203601.png)
 
-## Screenshots
+## Key Takeaways
 
-- EC2 instance running with successful status checks.
-- Security Group configuration.
-- DNS A record configuration in IONOS.
-- NGINX welcome page served from `nginx.shukriigal.com`.
-
-## Technologies Used
-
-- AWS EC2
-- Ubuntu
-- NGINX
-- IONOS DNS
-- Git
-- GitHub
-
-## Outcome
-
-Successfully deployed a public NGINX web server on AWS and configured a custom domain (`nginx.shukriigal.com`) to route traffic to the EC2 instance.
+This project strengthened my understanding of how Linux, AWS networking, security groups, and DNS work together to make a web server publicly accessible. It also gave me practical experience troubleshooting SSH and DNS issues.
 
