@@ -77,7 +77,8 @@ Nginx provides one entry point for the application. The Flask containers communi
 - Used a Docker volume for Redis data persistence.
 - Verified service communication through Docker networking.
 
-### Application Screenshots
+
+## Application Screenshots
 
 **Home page**
 
@@ -88,6 +89,7 @@ Nginx provides one entry point for the application. The Flask containers communi
 ![Redis-backed visitor counter](screenshots/visit-count.png)
 
 ## Running the Project
+
 
 Clone the repository:
 
