@@ -1,143 +1,127 @@
 # Shukri I.
 
-DevOps and cloud infrastructure engineer building hands-on experience across Linux, AWS, automation, networking, and containerized applications.
+DevOps and Cloud Engineer focused on AWS infrastructure, Infrastructure as Code, CI/CD automation, Linux, and containerized applications.
 
-Currently focused on strengthening my cloud infrastructure skills and building practical projects around Docker, AWS, and infrastructure automation.
-
----
-
-## 🚧 Current Focus
-
-- Building deeper AWS and cloud infrastructure skills
-- Developing hands-on experience with containerized applications
-- Next up: CI/CD, Terraform, and Kubernetes
-- Documenting my DevOps projects and troubleshooting along the way
+This repository showcases hands-on engineering projects covering cloud infrastructure, automated provisioning, container orchestration, networking, and deployment workflows.
 
 ---
 
-## 🧰 Tech Stack
+## 🚀 Featured Projects
 
-`Linux` `Bash` `Python` `Git` `Docker` `AWS` `NGINX` `Redis`
+### 1. AWS Infrastructure & Networking
 
-**Currently learning:** `CI/CD` `Terraform` `Kubernetes`
+Deployed and configured AWS infrastructure covering compute, networking, load balancing, and web server operations.
 
----
+**Stack:** AWS EC2, VPC, Application Load Balancer, Security Groups, Ubuntu, NGINX, DNS
 
-## 📂 What's in This Repository
+**Implementation**
+- Provisioned Ubuntu EC2 instances and configured NGINX web servers.
+- Configured VPC networking, subnets, routing, and security controls.
+- Deployed two EC2 instances behind an Application Load Balancer to distribute incoming HTTP traffic.
+- Configured SSH and HTTP access using Security Groups.
+- Connected a custom domain using DNS A records and troubleshot connectivity issues.
 
-This repository documents my hands-on DevOps work across:
+**Outcome:** Established accessible cloud-hosted web services with load-balanced infrastructure and configured network security.
 
-- **Linux** — system administration, permissions, processes, services, and troubleshooting
-- **Bash** — scripting, automation, CLI utilities, and administrative workflows
-- **Git & GitHub** — branching, merges, conflict resolution, SSH, and version control
-- **Networking** — TCP/IP, DNS, ports, protocols, firewalls, and troubleshooting
-- **AWS** — EC2, Security Groups, DNS, NGINX, and cloud infrastructure
-- **Docker** — images, containers, networking, Compose, persistence, and multi-container applications
+[View AWS Projects](./aws/)
 
----
+### 2. Terraform — Infrastructure as Code
 
-## 🔥 Featured Project
+Automated AWS infrastructure provisioning and application configuration using Terraform and cloud-init.
 
-### 🐳 Flask + Redis + NGINX Multi-Container Application
+**Stack:** Terraform, AWS EC2, Bash, Cloud-init, S3, Linux
 
-A containerized Python web application built to put Docker networking, service discovery, persistence, reverse proxying, and scaling into practice.
+**Implementation**
+- Provisioned EC2 infrastructure with automated NGINX installation using Terraform and cloud-init.
+- Built a WordPress deployment configuration consisting of nine AWS resources.
+- Automated Apache, MariaDB, PHP, and WordPress installation through Bash user-data scripts.
+- Worked with Terraform modules, S3 remote state, and infrastructure drift detection.
+- Troubleshot availability zone configuration and cloud-init execution issues.
+- Verified deployed infrastructure and performed controlled resource teardown.
 
-**Stack:**  
-`Python` `Flask` `Docker` `Docker Compose` `Redis` `NGINX`
+**Outcome:** Created repeatable infrastructure configurations with automated server provisioning, state management, and verified deployment workflows.
 
-### Architecture
+[View Terraform Projects](./terraform/)
 
-Browser → NGINX → Flask → Redis
+### 3. Docker — Containerized Applications
 
-### What it does
+Built multi-container applications using Docker Compose, with reverse proxy routing, service networking, scaling, and persistent storage.
 
-- 🐳 Runs Flask, Redis, and NGINX as separate containerized services
-- 🔗 Connects services through Docker networking and service discovery
-- 🌐 Uses NGINX as the application's reverse proxy and entry point
-- 📈 Scales the Flask application across three containers
-- 💾 Persists Redis data using a Docker volume
-- ⚙️ Uses environment variables for service configuration
-- 🐍 Runs the application backend with Python and Flask
-- 📝 Includes project documentation and a recorded application demo
+**Stack:** Docker, Docker Compose, Python, Flask, MySQL, Redis, NGINX
 
-### What I learned
+**Implementation**
+- Containerized Flask applications using Dockerfiles and multi-stage builds.
+- Configured a Flask and MySQL environment using Docker Compose.
+- Built a Flask, Redis, and NGINX visitor counter application.
+- Configured NGINX as a reverse proxy and scaled Flask to three replicas.
+- Implemented Docker networking for internal service communication.
+- Configured persistent Redis storage using Docker volumes.
 
-The biggest challenge was understanding how the services communicate with each other.
+**Outcome:** Ran interconnected containerized services with shared application state, reverse proxy routing, and three Flask replicas.
 
-Working through container networking helped me understand the difference between exposing an application to the host and communication between containers on an internal Docker network.
+[View Docker Projects](./docker/)
 
-Building the project also gave me hands-on troubleshooting experience across Docker Compose, service configuration, NGINX, Flask routing, persistence, and container connectivity.
+### 4. CI/CD — GitHub Actions
 
-➡️ **[View the project](./docker/flask-redis-visitor-counter/)**
+Implemented automated workflows for container builds and infrastructure validation.
 
----
+**Stack:** GitHub Actions, YAML, Docker, Terraform
 
-## ☁️ AWS Cloud Infrastructure Project
+**Implementation**
+- Configured a GitHub Actions workflow to build and push Docker images.
+- Implemented Terraform CI validation to check infrastructure configuration.
+- Defined workflow triggers, jobs, steps, and runner configurations.
+- Executed workflows and verified successful runs.
 
-Provisioned and configured a Linux web server on AWS to practice cloud infrastructure deployment and troubleshooting.
+**Outcome:** Established working CI automation for container image builds and Terraform configuration validation.
 
-### What I worked with
-
-- AWS EC2
-- Ubuntu Linux
-- NGINX
-- Security Groups
-- SSH
-- DNS / A records
-- Linux service administration
-- Network troubleshooting
-
-Configured an NGINX web server on an Ubuntu EC2 instance, implemented Security Group rules for SSH and HTTP access, connected a custom domain through DNS, and troubleshot SSH, DNS propagation, and connectivity issues.
+[View CI/CD Projects](./cicd/)
 
 ---
 
-## 🛠️ Other Hands-On Work
+## 🧰 Technical Stack
 
-### Linux & Bash
-
-- Linux filesystem navigation and administration
-- Users, permissions, and ownership
-- Process and service management
-- Bash scripting and automation
-- Text processing and troubleshooting
-- CLI calculator
-- Checksum utility
-- 15+ Bash practice scripts
-
-### Git & GitHub
-
-- Branching and merging
-- Merge conflict resolution
-- Git revert
-- SSH authentication
-- Version-controlled technical documentation
-
-### Networking
-
-- OSI and TCP/IP fundamentals
-- TCP vs UDP
-- DNS
-- Ports and protocols
-- Routing, NAT, and firewalls
-- Network troubleshooting
+| Category | Technologies |
+|---|---|
+| Cloud Infrastructure | AWS EC2, VPC, ALB, Security Groups, DNS |
+| Infrastructure as Code | Terraform, Cloud-init, S3 Remote State |
+| CI/CD | GitHub Actions, YAML |
+| Containers | Docker, Docker Compose |
+| Operating Systems | Linux, Ubuntu |
+| Scripting | Bash, Python |
+| Networking | TCP/IP, DNS, HTTP, SSH, Subnets, Routing, NAT |
+| Web & Databases | NGINX, Flask, Redis, MySQL, MariaDB |
+| Version Control | Git, GitHub |
 
 ---
 
-## 📈 What's Next
+## 📂 Repository Structure
 
-I'm continuing to build toward cloud and platform engineering by going deeper into:
-
-- CI/CD pipelines
-- Infrastructure as Code with Terraform
-- Kubernetes
-- AWS infrastructure
-- Observability and monitoring
-- Infrastructure automation
+| Directory | Description |
+|---|---|
+| [Linux](./linux/) | Linux administration, permissions, processes, and troubleshooting |
+| [Bash](./bash/) | Shell scripting, CLI utilities, and automation |
+| [Git](./git-labs/) | Branching, merging, conflict resolution, and version control |
+| [Networking](./networking/) | Network fundamentals and EC2 web server deployment |
+| [AWS](./aws/) | EC2, VPC networking, and load balancing |
+| [Docker](./docker/) | Containerized applications, networking, and scaling |
+| [Terraform](./terraform/) | AWS provisioning, automation, modules, and remote state |
+| [CI/CD](./cicd/) | GitHub Actions workflows for Docker and Terraform |
 
 ---
 
-## 🤝 Connect
+## Engineering Focus
 
-**LinkedIn:** [www.linkedin.com/in/shukri-igal/]
+- **Infrastructure Automation:** Repeatable AWS provisioning and configuration management using Terraform.
+- **CI/CD:** Automated build workflows and infrastructure validation with GitHub Actions.
+- **Containerization:** Multi-container applications, service networking, reverse proxies, and persistent storage.
+- **Cloud Networking:** VPC configuration, routing, security controls, load balancing, and DNS.
+- **Troubleshooting:** Diagnosing deployment failures, service connectivity, configuration issues, and infrastructure drift.
 
-Explore the folders in this repository for project documentation, configurations, scripts, and notes from my hands-on DevOps work.
+---
+
+## Connect
+
+**LinkedIn:** [Shukri I.](https://www.linkedin.com/in/shukri-igal/)
+
+Project directories contain source code, infrastructure configurations, automation scripts, technical documentation, and deployment evidence.
